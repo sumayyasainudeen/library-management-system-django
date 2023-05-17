@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:  Georgia;
+    
+}
+:root{
+    --dark:rgb(2, 91, 123);
+    --light:rgb(4, 140, 190);
+    --lighter:rgb(130, 213, 243);
+}
+
+
+.bar{
+    background-color: rgba(4, 111, 132,0.5);
+
+}
+
+
+
+
+
+
+
+

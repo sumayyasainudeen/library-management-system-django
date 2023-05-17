@@ -1,0 +1,53 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+{% block title %}
+Admin Pannel
+{% endblock %}
+
+{% block content %}
+
+<div id="main" >
+    <div class="card mx-auto  text-center bg-transparent py-5 card1" style="width: 100%; height: 100vh;">
+      <button class="openbtn" onclick="openNav()" style="width: 50px;">☰ </button>
+      <img src="{% static 'images/logo1.jpg' %}" width="150" class="img-responsive img-thumbnail"
+        style="margin:0 auto;">
+      <div class="card-body text-white ">
+        <h5 class="card-title display-2 ">PUBLIC LIBRARY</h5>
+        <h4 class="card-text">Let Us Grow Together!</h4>
+        <h2 class="card-text mt-5 text-white mt-5">Admin Pannel</h2>
+
+      </div>
+    </div>
+
+    <!-- <div class="scroll-container">
+      <a class="text-dark p-1" href="#top">Top</a>
+    </div> -->
+
+  </div>
+
+  <style>
+
+:root {
+      --dark: rgb(2, 91, 123);
+      --light: rgb(4, 140, 190);
+      --lighter: rgb(130, 213, 243);
+    }
+ .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: var(--dark);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+    }
+
+    .openbtn:hover {
+      background-color: var(--light);
+    }
+    body{
+        height: 100vh;
+    }
+
+  </style>
+
+{% endblock %}

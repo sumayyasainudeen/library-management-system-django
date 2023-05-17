@@ -1,0 +1,45 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+
+{% block title %}
+Edit Category
+{% endblock %}
+{% block content %}
+
+<div class=" col-sm-12">
+
+
+    <h3 class="alert alert-dark text-center my-5 ">
+        Edit Category
+    </h3>
+    <form method="post" action="/edit_category/{{ category.id }}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="">Category Name</label>
+        <input type="text" name="categoryname" class="form-control " value="{{ category.category_name}}">
+        <label class="mt-3" for="css">Upload Photo</label><br>
+
+        {% if category.category_image %}
+        <img src="{{ category.category_image.url }}" alt="" width="80rem"><br>
+        <input type="file" name="file" accept="image/*" class="form-control ">
+        {% else %}
+        <input type="file" name="file" accept="image/*" class="form-control ">
+        {% endif %}
+
+        <button type="submit" class="btn text-white mt-3 " style="width: 100%;">Submit</button>
+    </form>
+</div>
+<style>
+    .btn {
+        background-color: rgb(1, 84, 80);
+    }
+
+    .btn:hover {
+        background-color: rgb(5, 161, 154);
+    }
+</style>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+
+{% block title %}
+Add Penalty
+{% endblock %}
+
+{% block content %}
+
+<div id="main"  >
+
+    <div class="row">
+        <div class="col-sm-4">
+            <button class="openbtn" onclick="openNav()" style="width: 50px;">☰ </button>
+        </div>
+        <div class="col-sm-4 text-center pb-5">
+            <img src="{% static 'images/logo1.jpg' %}" width="150" class="img-responsive img-thumbnail"
+                style="margin:0 auto;">
+            <h5 class="card-title display-4 title">PUBLIC LIBRARY</h5>
+            <h5 class="card-text title">Let Us Grow Together!</h5>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a class=" btn logoutbtn text-white" href="{% url 'signout' %}"><i
+                    class="fa-solid fa-right-from-bracket"></i> LogOut</a>
+        </div>
+    </div>
+
+            <div class="container" >
+                <h3 class="alert  text-center my-5" style="width: 100%;">
+                    ADD PENALTY
+                </h3>
+                    <form method="post" action="/add_penalty/{{ data.id }}"  >
+                        {% csrf_token %}
+                        <label class="mt-3" for="css">Name : </label> <label class="mt-3" for="css"> {{data.member.user.first_name}} {{data.member.user.last_name}}</label><br>
+                        <label class="mt-3" for="css">Book Name : </label> <label class="mt-3" for="css"> {{data.book.name}} </label>
+                        <input type="number" name="penalty" class="form-control mt-3" placeholder="Enter Penalty">
+                        <label class="mt-3" for="css">Reason</label>
+                        <select class="form-control  " name="select" >
+                            <option value="damaged book">Damaged Book</option>
+                            <option value="missing book">Missing Book</option>
+                        </select>
+                        
+                        <button type="submit" class="btn  my-3 logoutbtn text-white" style="width: 100%;" >Submit</button>
+                    </form>
+
+                    <div class="col-md-12">
+                        {% for message in messages %}
+                        <h5>
+                            <div class="alert alert-success mt-5 text-center" style="width: 100%;">
+                                {{ message }}
+                            </div>
+                        </h5>
+                            {% endfor %}
+                    </div>
+            </div>
+        
+        <style>
+           
+            input[type=text],[type=number],[type=file]{
+                width: 100%;
+            }
+            :root {
+            --dark: rgb(2, 91, 123);
+            --light: rgb(4, 140, 190);
+            --lighter: rgb(130, 213, 243);
+        }
+
+        .logoutbtn {
+            background-color: var(--dark);
+            text-decoration: none;
+            color: var(--dark);
+
+        }
+
+        .title {
+            color: var(--dark);
+        }
+
+        body {
+            height: 200vh;
+        }
+
+        .alert {
+            background-color: var(--dark);
+            color: white;
+        }
+
+
+        </style>
+        </html>
+
+</div>
+
+{% endblock %}

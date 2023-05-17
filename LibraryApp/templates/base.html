@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/ic.png' %}" type="image/icon type">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/ca2474264d.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class=" index_header">
+
+
+        <nav class="navbar navbar-expand-lg  font-weight-bold position-fixed"
+            style="width: 100%; z-index: 1;">
+
+            <img class="card-img-top" src="{% static 'images/logo1.jpg' %}" alt="Card image cap" style="width: 100px;">
+
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon " style="width: 1em;"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto ">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white mx-2 navbtn" href="{% url 'index' %}"> <i
+                                class="fa-solid fa-house"></i><span class="sr-only">(current)</span></a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-2 navbtn" role="button" href="{% url 'index' %}#about">About
+                            Us</a>
+                        <!-- <a class="nav-link text-white mx-2 navbtn" href="about">About Us</a> -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-2 navbtn" role="button"
+                            href="{% url 'index' %}#footer1"> Contact Us</a>
+                        <!-- <a class="nav-link text-white mx-2 navbtn" href="footer1">Contact Us</a> -->
+                    </li>
+
+                    {% if request.user.is_authenticated and user.is_staff != 1 %}
+
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white navbtn mx-2" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            My Books
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'requested_books' %}">Requested Books</a>
+                            <a class="dropdown-item" href="{% url 'issued_books' %}">Issued Books</a>
+                            <a class="dropdown-item" href="{% url 'user_return_request_page' %}">Return Books</a>
+                            <a class="dropdown-item" href="{% url 'cancelled_books' %}">Cancelled Books</a>
+                        </div>
+                    </li>
+
+
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white navbtn mx-2" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Payments
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'payment_details' %}">Pay</a>
+                            <a class="dropdown-item" href="{% url 'payment_history' %}">Payment History</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-2 navbtn" href="{% url 'suggestion_form' %}"><i class="fa-solid fa-comment"></i> Suggestions</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white navbtn mx-2" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a>
+                            <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a>
+                        </div>
+                    </li>
+
+                   
+
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-2 navbtn" href="{% url 'signout' %}"><i class="fa-solid fa-right-from-bracket"></i> logout</a>
+                    </li>
+
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-2 navbtn" href="{% url 'signup_page' %}"><i
+                                class="fa-solid fa-user-plus"></i> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white mx-2 navbtn" href="{% url 'signin_page' %}"><i
+                                class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+                    </li>
+
+                    {% endif %}
+
+
+                </ul>
+
+            </div>
+        </nav>
+
+
+        <div class="text-white pt-5" style="font-family: Garamond;">
+
+            <div class="card bg-transparent border-0 mt-5">
+                <div class="card-body mt-5">
+
+                    <p class="text-white " style="font-size: 4vh;">Let Us Grow Together!</p>
+                    <h5 class="card-title " style="font-size: 10vh; ">PUBLIC LIBRARY</h5>
+
+                    <form class="form-inline my-lg-0 m" action="{% url 'search_book' %}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search">
+                        <button class="btn btn-outline-light my-5" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    <div class="scroll-container">
+        <a class="text-white p-1" href="#top">Top</a>
+    </div>
+
+
+
+
+    <!-- Sign In Modal -->
+
+    <div class="modal" id="signinModal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign In</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{% url 'signin' %}" method='post' class="was-validated ">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">User Name</label>
+                            <div class="input-group mb-3">
+
+                                <input type="text" class="form-control" name="username" placeholder="Enter User Name"
+                                    required>
+                            </div>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="pwd">Password</label>
+
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password"
+                                required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary ">Submit</button>
+                        </div><br><br>
+
+                        <div class="text-center">
+                            <h6 class="text-center">Not a Member?</h6>
+                            <a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+
+    <div class="modal" id="signupModal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign Up</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{% url 'create_user' %}" method="post" class="was-validated "
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Firstname</label>
+                            <input type="text" name="firstname" class="form-control" placeholder="Enter Firstname"
+                                required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Lastname</label>
+                            <input type="text" name="lastname" class="form-control" placeholder="Enter Lastname"
+                                required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Address</label>
+                            <input type="text" name="address" class="form-control" placeholder="Enter Address" required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Contact Number</label>
+                            <input type="number" name="phonenumber" class="form-control"
+                                placeholder="Enter Phone Number" required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Date of Birth</label>
+                            <input type="date" name="dob" class="form-control" placeholder="Enter DOB" required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="Enter username"
+                                required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="pwd">Password:</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter password"
+                                required>
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uname">Upload Image</label>
+                            <input type="file" name="file" accept="image/*" class="form-control ">
+                            <div class="valid-feedback">Valid</div>
+                            <div class="invalid-feedback">Please fill out this field</div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary ">Submit</button>
+                        </div><br><br>
+
+                        <div class="text-center">
+                            <h6 class="text-center">Already a Member?</h6>
+                            <a href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <style>
+        .index_header {
+            background-image: url("/static/images/a2.jpg");
+            background-size: 100% 100%;
+
+        }
+
+        .navbtn:hover {
+            background-color: rgb(2, 91, 123);
+            border-radius: 5px;
+        }
+
+        .head1 {
+            color: white;
+            animation-name: example;
+            animation-duration: 4s;
+        }
+
+        @keyframes example {
+            0% {
+                color: rgb(130, 3, 3);
+            }
+
+            25% {
+                color: rgb(251, 122, 42);
+            }
+
+            50% {
+                color: rgb(248, 159, 111);
+            }
+
+            100% {
+                color: rgb(250, 180, 152);
+            }
+        }
+
+        body {
+            position: relative;
+            font-family:  Georgia;
+        }
+
+
+
+        .scroll-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+        }
+
+        /* to hide the button when page first loaded */
+        .scroll-container:before {
+            content: '';
+            display: block;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        /* fixed to right bottom of page */
+        .scroll-container a {
+            position: sticky;
+            top: 88vh;
+            cursor: pointer;
+            font-size: 20px;
+            border: 1px solid;
+            border-radius: 5px;
+
+        }
+
+        .navbar-fixed-top {
+            position: sticky;
+            top: 0;
+            height: 60px;
+        }
+
+        .navbar-fixed-top--scrolled {
+            /* change background-color to whatever you want */
+            background-color: grey;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                if (scroll > 350) {
+                    $(".navbar").css("background", "rgb(2, 91, 123)");
+                }
+
+                else {
+                    $(".navbar").css("background", "");
+                }
+            })
+        })
+    </script>
+
+
+</body>
+
+</html>

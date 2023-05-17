@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+
+{% block title %}
+Welcome to Public Library
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="container pt-3 text-center">
+    {% for message in messages %}
+    <h5>
+        <div class="text-danger text-center" style="width: 50%;">
+            {{ message }}
+        </div>
+    </h5>
+    {% endfor %}
+</div>
+<div class="main mx-auto mb-5" style="border-radius: 10px; width:50%">
+    <div class="sub container mt-5  ">
+        <h1 class="text-light  text-center pt-5 ">Register Here</h1>
+        <p class="text-center text-white mb-3">----------- <i class="fa-solid fa-book"> -----------</i></p>
+
+
+        <form name="myForm" action="{% url 'create_user' %}" method="post" enctype="multipart/form-data"
+            onsubmit="return validation()" class="form pt-2 pb-5 mx-auto text-white" style="width:80% ; ">
+            {% csrf_token %}
+            <label class="mt-3" id="fname" for="">First Name</label>
+            <input type="text" name="firstname" id="fname" class="form-control" placeholder="Enter Firstname" required>
+
+
+            <label class="mt-3" for="">Last Name</label>
+            <input type="text" name="lastname" id="lname" class="form-control" placeholder="Enter Lastname" required>
+
+            <label class="mt-3" for="">Address</label>
+            <textarea rows="3" cols="22" name="address" class="form-control  " placeholder="Address"></textarea>
+
+            <label class="mt-3" for="">Email</label>
+            <input type="email" name="email" class="form-control " placeholder="Email">
+
+            <label class="mt-3" for="">Contact Number</label>
+            <input type="number" id="num" name="phonenumber" class="form-control  " placeholder="Phone Number">
+            <label for="" style="display: none;" id="num_error" class="text-danger mt-3">Number should not Exceed
+                10!</label><br>
+
+            <label class="mt-3" for="">Date Of Birth</label>
+            <input type="date" name="dob" class="form-control  " placeholder="DOB">
+
+            <label class="mt-3" for="">Password</label>
+            <div class="row">
+                <div class="col-md-8"><input type="password" name="password" id="password" class="form-control "
+                        placeholder="Password">
+                    <input type="checkbox" onclick="showPassword('password')">Show Password
+                </div>
+                <div class="col-md-4"> <a class="btn  text-dark btn-light  " style="width: 100%; " id="suggestion"
+                        onclick="suggestPassword()">Generate Password</a>
+                </div>
+            </div>
+
+            <label class="mt-3" for="">Confirm Password</label>
+            <input type="password" name="cpassword" id="cpassword" class="form-control " placeholder="Confirm Password">
+            <input type="checkbox" onclick="showPassword('cpassword')">Show Password<br>
+
+
+            <!-- <input type="text" name="pass1" id="pass1" class="pass_suggestion mt-3" onmousedown="setpassword('pass1')">
+            <input type="text" name="pass2" id="pass2" class="pass_suggestion mt-3" onmousedown="setpassword('pass2')">
+            <input type="text" name="pass3" id="pass3" class="pass_suggestion mt-3" onmousedown="setpassword('pass3')"> -->
+
+
+
+            <label class="form-label  mt-3" for="uname">Upload Image</label>
+            <input type="file" name="file" accept="image/*" class="form-control ">
+
+            <button type="submit" class="btn submitbtn text-white rounded-pill  mt-5" style="width: 100%; "
+                id="submit">Submit</button>
+            <br>
+            <p class='text-light text-center mt-2'>Already a member. <a class="" href="">Login</a></p>
+        </form>
+    </div>
+</div>
+
+
+
+<section id="footer1">
+
+    <div class="footer  text-white">
+        <div class="container">
+            <div class="row p-5 ">
+                <div class="col-md-3 font-weight-light">
+                    <h5>Get to Know Us</h5>
+                    <hr>
+                    <h6>Far Far Away</h6>
+                    <h6>Behind The World</h6>
+                    <h6>Mountains</h6>
+                    <h6>Far From The Countries</h6>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-google"></i>
+                </div>
+                <div class="col-md-3">
+                    <h5>Menu</h5>
+                    <hr>
+                    <h6>Shop</h6>
+                    <h6>About Us</h6>
+                    <h6>Contact Us</h6>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509918.949550237!2d-123.79820902299119!3d37.184280336325216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1675878030105!5m2!1sen!2sin"
+                        width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <hr>
+                    <h6>Shipping Information</h6>
+                    <h6>Sell on ECom</h6>
+                    <h6>Fulfillment by ECom</h6>
+                    <h6>Become an Affiliate</h6>
+                    <h6>Advertise Your Products</h6>
+                </div>
+                <div class="col-md-3">
+                    <h5>Location</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-2 py-3"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="col">
+                            <p> Far Far Away, Behind The World, Mountains, Far From The Countries</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2 "><i class="fa-solid fa-phone"></i></div>
+                        <div class="col">
+                            <p> +234531234</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 "><i class="fa-solid fa-envelope"></i></div>
+                        <div class="col">
+                            <p> publiclibrary@gmail.com</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<style>
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+
+    body {
+        background-image: url("/static/images/a8.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .title {
+        color: var(--dark);
+    }
+
+    .footer {
+        background-color: var(--dark);
+
+    }
+
+    iframe {
+        border-radius: 10px;
+    }
+
+    .main {
+        background-image: url("/static/images/a4.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+    }
+
+    .pass_suggestion {
+        text-decoration: none;
+        text-align: center;
+        border: 0;
+        background-color: transparent;
+        color: white;
+    }
+
+    .pass_suggestion:focus {
+        text-decoration: none;
+        text-align: center;
+        border: 1px solid green;
+        background-color: transparent;
+        color: white;
+    }
+
+    .sub {
+        background-color: rgba(1, 76, 119, 0.6);
+        border-radius: 10px;
+    }
+
+    .submitbtn {
+        background-color: var(--dark);
+    }
+
+    .submitbtn:hover {
+        background-color: var(--light);
+    }
+</style>
+<script>
+
+    function validation() {
+        let x = document.forms["myForm"]["fname"].value;
+        if (x[0] != x[0].toUpperCase()) {
+            alert("First Letter of First Name Should Be In Uppercase");
+            return false;
+        }
+
+        let y = document.forms["myForm"]["lname"].value;
+        if (y[0] != y[0].toUpperCase()) {
+            alert("First Letter of Last Name Should Be In Uppercase");
+            return false;
+        }
+
+    }
+
+    $("#num").blur(function () {
+        var text = $(this).val()
+        if (text.length > 10) {
+            $("#num_error").show()
+        } else {
+            $("#num_error").hide()
+        }
+    })
+
+
+
+    function suggestPassword() {
+        var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var passwordLength = 8;
+        var password = "";
+        for (var i = 0; i <= passwordLength; i++) {
+            var randomNumber = Math.floor(Math.random() * chars.length);
+            password += chars.substring(randomNumber, randomNumber + 1);
+        }
+        document.getElementById("password").value = password;
+        document.getElementById("cpassword").value = password;
+
+        // var password = "";
+        // for (var i = 0; i <= passwordLength; i++) {
+        //     var randomNumber = Math.floor(Math.random() * chars.length);
+        //     password += chars.substring(randomNumber, randomNumber + 1);
+        // }
+        // document.getElementById("pass2").value = password;
+
+        // var password = "";
+        // for (var i = 0; i <= passwordLength; i++) {
+        //     var randomNumber = Math.floor(Math.random() * chars.length);
+        //     password += chars.substring(randomNumber, randomNumber + 1);
+        // }
+        // document.getElementById("pass3").value = password;
+    }
+
+    // function setpassword(pass){
+    //     var password = document.getElementById(pass).value;
+    //     console.log(password);
+    //     document.getElementById("password").value = password;
+    // }
+
+    function showPassword(pass) {
+        var x = document.getElementById(pass);
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+
+
+
+
+
+</script>
+
+{% endblock %}

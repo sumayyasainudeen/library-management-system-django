@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Book Details
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+    <div class="row p-5">
+        {% for i in book %}
+        <div class="col-md-4">
+
+            <img class="img img-thumbnail" src=" {{ i.image.url }}" alt="" width="250rem">
+            {% if i.quantity > 0 %}
+            <h5 class="alert alert-success text-center text-success mt-2 " style="width: 15.5rem;">
+                Available
+            </h5>
+            {% else %}
+            <h5 class="alert alert-danger text-center text-danger mt-2 " style="width: 15.5rem;">
+                Out Of Stock!
+            </h5>
+            {% endif %}
+        </div>
+        <div class="col-md-8 p-3 details ">
+            <h2 class="title">Name : {{ i.name }}</h2>
+            <h4 class="title">Author : {{ i.author }}</h4>
+            <h5 class="title">Price : Rs.{{ i.price }}</h5>
+            <h5 class="title">Published Year : {{ i.publish_year }}</h5>
+            <h5 class="title">Language : {{ i.language }}</h5>
+            <h5 class="title">Available Stock : {{ i.quantity }}</h5>
+            <p class="text-justify">About The Book : {{ i.description }}</p>
+            {% if i.quantity > 0 %}
+            <a href="{% url 'send_issue_request' i.id %}" class="btn  pbtn mt-5"
+                onclick="alert('Issue Request Sent!');">Issue Request</a>
+            <a href="{% url 'index' %}" class="btn  pbtn mt-5">Search Another</a>
+            {% else %}
+            <a href="{% url 'index' %}" class="btn  pbtn mt-5">Search Another</a>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<section id="footer1">
+
+    <div class="footer text-white">
+        <div class="container">
+            <div class="row p-5 ">
+                <div class="col-md-3 font-weight-light">
+                    <h5>Get to Know Us</h5>
+                    <hr>
+                    <h6>Far Far Away</h6>
+                    <h6>Behind The World</h6>
+                    <h6>Mountains</h6>
+                    <h6>Far From The Countries</h6>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-google"></i>
+                </div>
+                <div class="col-md-3">
+                    <h5>Menu</h5>
+                    <hr>
+                    <h6>Shop</h6>
+                    <h6>About Us</h6>
+                    <h6>Contact Us</h6>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509918.949550237!2d-123.79820902299119!3d37.184280336325216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1675878030105!5m2!1sen!2sin"
+                        width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <hr>
+                    <h6>Shipping Information</h6>
+                    <h6>Sell on ECom</h6>
+                    <h6>Fulfillment by ECom</h6>
+                    <h6>Become an Affiliate</h6>
+                    <h6>Advertise Your Products</h6>
+                </div>
+                <div class="col-md-3">
+                    <h5>Location</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-2 py-3"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="col">
+                            <p> Far Far Away, Behind The World, Mountains, Far From The Countries</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2 "><i class="fa-solid fa-phone"></i></div>
+                        <div class="col">
+                            <p> +234531234</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 "><i class="fa-solid fa-envelope"></i></div>
+                        <div class="col">
+                            <p> publiclibrary@gmail.com</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<style>
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+
+    .title {
+        color: var(--dark);
+    }
+
+    .footer {
+        background-color: var(--dark);
+
+    }
+
+    body {
+        background-image: url("/static/images/a8.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    iframe {
+        border-radius: 10px;
+    }
+    .pbtn {
+        background-color: var(--dark);
+        color: white;
+       
+    }
+    .details{
+        background-color: rgba(4, 79, 113, 0.1);
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,37 @@
+ <header class="admin_header" style="position: fixed; z-index: 1; width: 100%; ">
+
+
+    <div class="row" >
+        <div class="col-sm-3">
+          <div class="card border-0 bg-transparent">
+            <div class="card-body">
+                <img src="{% static 'images/logo.webp' %}" width="150" height="150" class="img img-thumbnail">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 text-white">
+          <div class="card border-0 bg-transparent">
+            <div class="card-body " style="font-family: Lucida Console;">
+                <h1 class="display-1 ">PUBLIC LIBRARY</h1>
+                <h1 class="display-4  ml-5">Admin Pannel</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+   </header>
+
+
+<div class="sidebar " style="background-color: rgb(1, 84, 80);">
+    <a class="active" href="{% url 'index' %}"><i class="fa-solid fa-house-chimney"></i>  Home</a>
+    <a href="{% url 'add_category_page' %}"><i class="fa-solid fa-building"></i>  Add Category</a>
+    <a href="{% url 'view_category' %}"><i class="fa-solid fa-address-book"></i>  View category</a>
+    <a href=""><i class="fa-solid fa-book"></i>  Add Books</a>
+    <a href=""><i class="fa-solid fa-book"></i>  Show Books</a>
+    <a href=""><i class="fa-solid fa-book"></i>  Issued Books</a>
+    <a href=""> <i class="fa-solid fa-file"></i>  Penalty</a>
+    <a href=""><i class="fa-solid fa-code-pull-request"></i> Issue Book Requests</a>
+    <a href=""><i class="fa-solid fa-code-pull-request"></i>  Return Book Requests</a>
+    <a href=""><i class="fa-solid fa-users"></i> Show Users</a>
+    <a href="{% url 'signout' %}"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
+
+</div>

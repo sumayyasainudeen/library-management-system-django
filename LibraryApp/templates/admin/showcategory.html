@@ -1,0 +1,190 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+
+{% block title %}
+View Category
+{% endblock %}
+
+{% block content %}
+
+<div id="main">
+    <div class=" " style="z-index: 1;">
+        <div class="row">
+            <div class="col-sm-4">
+                <button class="openbtn" onclick="openNav()" style="width: 50px;">☰ </button>
+            </div>
+            <div class="col-sm-4 text-center pb-5">
+                <img src="{% static 'images/logo1.jpg' %}" width="150" class="img-responsive img-thumbnail"
+                    style="margin:0 auto;">
+                <h5 class="card-title display-4 title">PUBLIC LIBRARY</h5>
+                <h5 class="card-text title">Let Us Grow Together!</h5>
+            </div>
+            <div class="col-sm-4 text-right">
+                <a class=" btn logoutbtn text-white" href="{% url 'signout' %}"><i
+                        class="fa-solid fa-right-from-bracket"></i> LogOut</a>
+            </div>
+        </div>
+        <div class="container">
+            <h3 class="alert  text-center  mb-5" style="width: 100%;">
+                CATEGORIES
+            </h3>
+
+            <div class="row ">
+                <div class="col-sm-12 mx-auto">
+
+                    <table class="table  table-hover text-center " style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>CATEGORY NAME</th>
+                                <th>CATEGORY IMAGE</th>
+                                <th>ACTION</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in category %}
+                            <tr>
+                                <td>{{ p.category_name}}</td>
+                                <td>
+                                    {% if p.category_image %}
+                                    <img src="{{ p.category_image.url }}" width="60px">
+                                    {% else %}
+                                    <img src="{% static 'images/default.png' %}" alt="" width="60px">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn   btn-outline-dark" href="{% url 'edit_category_page' p.id %}"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+
+                                    <a class="btn  btn-outline-dark " href="{% url 'delete_category' p.id %}"><i
+                                            class="fa-regular fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+    .logoutbtn {
+        background-color: var(--dark);
+        text-decoration: none;
+        color: var(--dark);
+
+    }
+    .title{
+        color: var(--dark);
+    }
+
+    .alert {
+        background-color: var(--dark);
+        color: white;
+    }
+
+    th {
+        background: var(--light);
+        color: white;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 1px solid #cdcdcd;
+        font: normal 12px arial;
+        width: 100%;
+        background-color: rgba(2, 91, 123, 0.3);
+    }
+
+    td,
+    th {
+        border: 1px solid #cdcdcd;
+        padding: 2px;
+    }
+
+
+    @media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+
+        /* Section three*/
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        /* Section four*/
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Section five*/
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td:before {
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        /* Section six*/
+
+        td:nth-of-type(1):before {
+            content: "CATEGORY NAME";
+        }
+
+        td:nth-of-type(2):before {
+            content: "CATEGORY IMAGE";
+        }
+
+        td:nth-of-type(3):before {
+            content: "";
+        }
+
+
+
+
+    }
+
+    /* Section seven*/
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        body {
+            padding: 0;
+            margin: 0;
+            width: 320px;
+        }
+    }
+
+    /* Section eight*/
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        body {
+            width: 495px;
+        }
+    }
+</style>
+
+
+{% endblock %}

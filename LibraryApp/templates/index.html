@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Welcome to Public Library
+{% endblock %}
+
+{% block content %}
+
+
+<div class="mx-5" style="padding-top: 5em;">
+
+
+
+    <section>
+        <div class=" container my-3">
+            <h2 class="title text-center font-weight-bold ">CATEGORIES</h2>
+            <p class="text-center mb-5">----------- <i class="fa-solid fa-book"> -----------</i></p>
+
+
+            <div class="card-deck my-5  ">
+                {% for c in category|slice:":6" %}
+
+                <div class="flip-card mx-1">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class=" rounded-circle" src="{{ c.category_image.url }}" alt="Avatar"
+                                style="width:180px;height:180px;">
+                        </div>
+                        <div class="flip-card-back">
+                            <a class="cat_link stretched-link" href="{% url 'category_page' c.id %}"
+                                style="text-decoration: none;">
+                                <h2 class="text-white my-5 pt-4">{{ c.category_name }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+</div>
+</section>
+
+
+
+
+<!-- <section>
+        <div class=" container ">
+            <h2 class="title text-center font-weight-bold ">CATEGORIES</h2>
+            <p class="text-center mb-5">----------- <i class="fa-solid fa-book"> -----------</i></p>
+
+
+            <div class="card-deck my-4  mx-auto">
+                {% for c in category|slice:":6" %}
+
+                <div class="hover card border-0 ">
+                    <img class=" rounded-circle" src="{{ c.category_image.url }}" alt="Card image cap"
+                        style="height: 10rem;">
+                    <div class="card-body text-center">
+                        <a class="cat_link stretched-link" href="{% url 'category_page' c.id %}"
+                            style="text-decoration: none;">
+                            <h5 class="card-title title">{{ c.category_name }}</h5>
+                        </a>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+</div>
+</section> -->
+
+<section id="trending">
+    <div class=" container">
+        <h2 class=" text-center font-weight-bold  text-light pt-5">TOP REVIEWED BOOKS</h2>
+        <p class="text-center text-white mb-5">------------------ <i class="fa-solid fa-book"> ------------------</i>
+        </p>
+        <div class="card-deck">
+            {% for i in book|slice:":4" %}
+            <div class="col-sm-6">
+
+                <div class="card mb-4" style=" flex-direction: row;">
+                    <a class="stretched-link" href="{% url 'book_detail' i.id %}"><img src="{{ i.image.url }}"
+                            class="card-img-top" alt="..." style="width: 250px;"></a>
+                    <div class="card-body">
+                        <h5 class="card-title title">{{ i.name }}</h5>
+                        <h6 class="card-title title">{{ i.author }}</h6>
+                        <p class="card-text text-justify">{{ i.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+</section>
+
+
+<div class="part1 ">
+    <section>
+        <h2 class="title text-center pt-5 font-weight-bold">NEW ARRIVALS</h2>
+        <h4 class="text-secondary text-center pb-5">Freedom To Discover</h4>
+        <div class="container">
+            <div class=" row mx-auto">
+                {% for i in book|slice:":12" %}
+                <div class="col-md-3">
+
+                    <div class="card border-0 my-2 hover" style="width: 13rem; ">
+                        <a class="stretched-link" href="{% url 'book_detail' i.id %}"><img class="card-img-top"
+                                src="{{ i.image.url }}" alt="Card image cap"></a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title title">{{ i.name }}</h5>
+                            <p class="card-text title">{{ i.author }}</p>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+            <div class="text-center py-5">
+                <a href="{% url 'more_books_page' %}" class="btn morebtn text-white mb-5">MORE BOOKS</a>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section id="about" class=" container-fluid pb-5 ">
+        <div class=" abt row py-5 mx-2">
+            <div class="col-sm-5 text-center py-5">
+                <iframe class="embed-responsive embed-responsive-1by1" width="500" height="406"
+                    src="https://www.youtube.com/embed/ow6yfkaJVvE" title="Welcome to the University Library"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="abt2 col-sm-7 text-center py-5 ">
+                <img class="img img-thumbnail" src="{% static 'images/logo1.jpg' %}" alt="Card image cap"
+                    style="width: 100px;">
+
+                <h1 class="text-white pt-5 ">PUBLIC LIBRARY</h1>
+                <p class="text-center mb-5 text-white">-------------- <i class="fa-solid fa-book"> --------------</i>
+                </p>
+                <P class="text-justify text-white">Lorem Ipsum is simply dummy text of the printing and typesetting
+                    industry.
+                    Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and
+                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap
+                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                    the
+                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing
+                    software like Aldus PageMaker including versions of Lorem Ipsum.</P>
+            </div>
+        </div>
+
+
+    </section>
+</div>
+
+<section id="footer1">
+
+    <div class="footer  text-white">
+        <div class="container">
+            <div class="row p-5 ">
+                <div class="col-md-3 font-weight-light">
+                    <h5>Get to Know Us</h5>
+                    <hr>
+                    <h6>Far Far Away</h6>
+                    <h6>Behind The World</h6>
+                    <h6>Mountains</h6>
+                    <h6>Far From The Countries</h6>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-google"></i>
+                </div>
+                <div class="col-md-3">
+                    <h5>Menu</h5>
+                    <hr>
+                    <h6>Shop</h6>
+                    <h6>About Us</h6>
+                    <h6>Contact Us</h6>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509918.949550237!2d-123.79820902299119!3d37.184280336325216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1675878030105!5m2!1sen!2sin"
+                        width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+                <div class="col-md-3">
+                    <h5>Help</h5>
+                    <hr>
+                    <h6>Shipping Information</h6>
+                    <h6>Sell on ECom</h6>
+                    <h6>Fulfillment by ECom</h6>
+                    <h6>Become an Affiliate</h6>
+                    <h6>Advertise Your Products</h6>
+                </div>
+                <div class="col-md-3">
+                    <h5>Location</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-2 py-3"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="col">
+                            <p> Far Far Away, Behind The World, Mountains, Far From The Countries</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2 "><i class="fa-solid fa-phone"></i></div>
+                        <div class="col">
+                            <p> +234531234</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 "><i class="fa-solid fa-envelope"></i></div>
+                        <div class="col">
+                            <p> publiclibrary@gmail.com</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<style>
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+
+    body {
+        font-family: Garamond;
+    }
+
+    .title {
+        color: var(--dark);
+    }
+
+    .pbtn {
+        font-size: 2vh;
+        width: 7rem;
+    }
+
+    .part1 {
+        /* background-color:var(--lighter); */
+        background-image: url("/static/images/a8.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /* background-attachment: fixed; */
+
+    }
+
+    body {
+        font-family: Georgia;
+    }
+
+    .hover:hover {
+        transform: scale(1.05);
+        /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+    }
+
+    iframe {
+        border-radius: 10px;
+    }
+
+    #trending {
+        background-image: url("/static/images/a4.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+    }
+
+    .abt {
+        background-image: url("/static/images/a3.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        border-radius: 10px;
+    }
+
+    .abt2 {
+
+        border-radius: 10px;
+        background-color: rgba(3, 69, 100, 0.6);
+    }
+
+    .morebtn {
+        background-color: var(--dark);
+
+    }
+
+    .footer {
+        background-color: var(--dark);
+
+    }
+
+    /* flip card */
+    .flip-card {
+        background-color: transparent;
+        width: 180px;
+        height: 180px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        background-color: white;
+        color: black;
+    }
+
+    .flip-card-back {
+        background-color: var(--dark);
+        color: white;
+        transform: rotateY(180deg);
+        border-radius: 100px;
+    }
+</style>
+
+
+
+
+
+
+{% endblock %}

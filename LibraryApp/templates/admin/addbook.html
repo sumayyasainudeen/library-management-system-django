@@ -1,0 +1,108 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+
+{% block title %}
+Add Books
+{% endblock %}
+
+{% block content %}
+
+<div id="main">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <button class="openbtn" onclick="openNav()" style="width: 50px;">☰ </button>
+        </div>
+        <div class="col-sm-4 text-center pb-5">
+            <img src="{% static 'images/logo1.jpg' %}" width="150" class="img-responsive img-thumbnail"
+                style="margin:0 auto;">
+            <h5 class="card-title display-4 title">PUBLIC LIBRARY</h5>
+            <h5 class="card-text title">Let Us Grow Together!</h5>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a class=" btn logoutbtn text-white" href="{% url 'signout' %}"><i
+                    class="fa-solid fa-right-from-bracket"></i> LogOut</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h3 class="alert  text-center mb-5">
+            Add Book Details
+        </h3>
+
+        <form method="post" action="{% url 'add_book' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label class="mt-3" for="css">Category</label>
+            <select class="form-control  " name="select">
+                {% for i in category %}
+
+                <option value="{{ i.id }}">{{ i.category_name }}</option>
+
+                {% endfor %}
+            </select>
+
+            <input type="text" name="name" class="form-control mt-3" placeholder="Enter Book Name">
+            <input type="text" name="author" class="form-control mt-3" placeholder="Enter authors Name">
+            <label class="mt-3" for="css">Upload Photo</label>
+            <input type="file" name="file" accept="image/*" class="form-control   ">
+            <input type="text" name="description" class="form-control mt-3" placeholder="Enter Book Description">
+            <input type="text" name="publishedyear" class="form-control mt-3" placeholder="Enter Published Year">
+            <input type="text" name="language" class="form-control mt-3" placeholder="Enter Language">
+            <input type="number" name="price" class="form-control mt-3" placeholder="Enter Book Price">
+            <input type="number" name="quantity" class="form-control mt-3" placeholder="Enter Quantity">
+
+            <button type="submit" class="btn text-white mt-3 " style="width: 100%;"
+                onclick="alert('Book Added!');">Submit</button>
+        </form>
+
+        <div class="col-md-12">
+            {% for message in messages %}
+            <h5>
+                <div class="alert alert-success mt-5 text-center" style="width: 100%;">
+                    {{ message }}
+                </div>
+            </h5>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .logoutbtn {
+        background-color: var(--dark);
+        text-decoration: none;
+        color: var(--dark);
+
+    }
+    .title{
+        color: var(--dark);
+    }
+    
+    .btn {
+        background-color: var(--dark);
+    }
+
+    .btn:hover {
+        background-color: var(--light);
+    }
+
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+
+
+
+    .alert {
+        background-color: var(--dark);
+        color: white;
+    }
+</style>
+
+
+
+
+{% endblock %}

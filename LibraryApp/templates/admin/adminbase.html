@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+  {% load static %}
+  <script src="{% static 'script.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="icon" href="{% static 'images/ic.png' %}" type="image/icon type">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/ca2474264d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+
+
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% url 'admin_home_page' %}">  <i class="sidelink fa-solid fa-house"></i>Home</a>
+    <a href="{% url 'add_category_page' %}"><i class=" sidelink fa-solid fa-layer-group"></i>Add Category</a>
+    <a href="{% url 'view_category' %}"><i class="sidelink fa-solid fa-layer-group"></i>View category</a>
+    <button class="dropdown-btn "><i class="sidelink fa-solid fa-book"></i>Books
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="{% url 'add_book_page' %}">Add Books</a>
+      <a href="{% url 'view_books' %}">View Books</a>
+      <a href="{% url 'all_issued_books' %}">Issued Books</a>
+      <a href="{% url 'all_cancelled_books' %}">Cancelled Books</a>
+    </div>
+    <a href="{% url 'view_payment' %}"><i class="sidelink fa-duotone fa-credit-card"></i>Payments</a>
+    <button class="dropdown-btn"><i class="sidelink fa-solid fa-envelope"></i>Requests
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="{% url 'issue_request_received' %}">Issue Book</a>
+      <a href="{% url 'return_request_received' %}">Return Book</a>
+    </div>
+    <a href="{% url 'show_suggestions' %}"><i class="sidelink fa-solid fa-comments"></i>User Suggestions</a>
+    <a href="{% url 'show_users' %}"><i class="sidelink fa-solid fa-users"></i>Show Users</a>
+    <a href="{% url 'signout' %}"><i class="sidelink fa-solid fa-right-from-bracket"></i>Log Out</a>
+
+  </div>
+
+ 
+    {% block content %}
+
+    {% endblock %}
+
+
+
+
+
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  </script>
+  <style>
+    :root {
+      --dark: rgb(2, 91, 123);
+      --light: rgb(4, 140, 190);
+      --lighter: rgb(130, 213, 243);
+    }
+
+    .card1 {
+      background-image: url("/static/images/a2.jpg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      border: 2px solid var(--dark);
+      box-shadow: 5px 5px 10px var(--dark);
+    }
+
+    body {
+      position: relative;
+    }
+
+
+    .scroll-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+
+    /* to hide the button when page first loaded */
+    .scroll-container:before {
+      content: '';
+      display: block;
+      height: 100vh;
+      pointer-events: none;
+    }
+
+    /* fixed to right bottom of page */
+    .scroll-container a {
+      position: sticky;
+      top: 88vh;
+      cursor: pointer;
+      font-size: 20px;
+      border: 1px solid;
+      border-radius: 5px;
+
+    }
+
+    body {
+      background-image: url("/static/images/a8.jpg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      font-family: Garamond;
+    }
+
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      display: none;
+      background-color: var(--dark);
+      /* padding-left: 8px; */
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: var(--dark);
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+
+    .dropdown-btn {
+
+      text-align: left;
+      width: 100%;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      background-color: var(--dark);
+      border: 0;
+    }
+    .sidelink{
+      margin-right: 20px;
+    }
+
+    .sidebar a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover,
+    .dropdown-btn:hover {
+      text-decoration: none;
+      background-color: var(--light);
+      color: white;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: var(--dark);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+    }
+
+    .openbtn:hover {
+      background-color: var(--light);
+    }
+
+    #main {
+      transition: margin-left .5s;
+      padding: 16px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+      .sidebar {
+        padding-top: 15px;
+      }
+
+      .sidebar a {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+
+
+</body>
+
+</html>

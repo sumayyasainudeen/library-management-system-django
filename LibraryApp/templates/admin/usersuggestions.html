@@ -1,0 +1,85 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+
+{% block title %}
+Public Library Users
+{% endblock %}
+
+{% block content %}
+
+
+<div id="main">
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <button class="openbtn" onclick="openNav()" style="width: 50px;">☰ </button>
+        </div>
+        <div class="col-sm-4 text-center pb-5">
+            <img src="{% static 'images/logo1.jpg' %}" width="150" class="img-responsive img-thumbnail"
+                style="margin:0 auto;">
+            <h5 class="card-title display-4 title">PUBLIC LIBRARY</h5>
+            <h5 class="card-text title">Let Us Grow Together!</h5>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a class=" btn logoutbtn text-white" href="{% url 'signout' %}"><i
+                    class="fa-solid fa-right-from-bracket"></i> LogOut</a>
+        </div>
+    </div>
+
+    <h3 class="alert text-center ">
+        USER SUGGESTIONS
+    </h3>
+    {% for s in data %}
+
+    <div class="card  suggestion_card mb-3" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="title card-title">{{ s.member.user.first_name }} {{ s.member.user.last_name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ s.member.user.email }}</h6>
+          <p class="title card-text">{{ s.topic }}</p>
+          <p class="title card-text">{{ s.suggestion }}</p>
+          
+        </div>
+      </div>
+
+    {% endfor %}
+   
+</div>
+
+<style>
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+
+    .logoutbtn {
+        background-color: var(--dark);
+        text-decoration: none;
+        color: var(--dark);
+
+    }
+
+    .title {
+        color: var(--dark);
+    }
+
+    body {
+        height: 200vh;
+    }
+
+    .alert {
+        background-color: var(--dark);
+        color: white;
+    }
+    .suggestion_card{
+        background-color:rgba(1, 62, 105,0.2);
+        border: 2px solid var(--dark);
+        box-shadow: 5px 5px 10px var(--dark);
+    }
+
+   
+</style>
+
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+
+{% block title %}
+Add Category
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4">
+                <button class="openbtn" onclick="openNav()" style="width: 50px;">☰ </button>
+            </div>
+            <div class="col-sm-4 text-center pb-5">
+                <img src="{% static 'images/logo1.jpg' %}" width="150" class="img-responsive img-thumbnail"
+                    style="margin:0 auto;">
+                <h5 class="card-title display-4 title">PUBLIC LIBRARY</h5>
+                <h5 class="card-text title">Let Us Grow Together!</h5>
+            </div>
+            <div class="col-sm-4 text-right">
+                <a class=" btn logoutbtn text-white" href="{% url 'signout' %}"><i
+                        class="fa-solid fa-right-from-bracket"></i> LogOut</a>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <h3 class="alert  text-center mb-5" style="width: 100%;">
+                Add Category Details
+            </h3>
+
+            <form method="post" action="{% url 'add_category' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="categoryname" class="form-control mt-3" placeholder="Enter Category Name">
+                <input type="file" name="file" accept="image/*" class="form-control mt-3  ">
+                <button type="submit" class="btn  my-3 text-white" style="width: 100%;"
+                    onclick="alert('Category added!');">Submit</button>
+            </form>
+
+            <div class="col-md-12">
+                {% for message in messages %}
+                <h5>
+                    <div class="alert alert-success mt-5 text-center" style="width: 100%;">
+                        {{ message }}
+                    </div>
+                </h5>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    input[type=text],
+    [type=number],
+    [type=file] {
+        width: 100%;
+    }
+
+    .btn {
+        background-color: var(--dark);
+    }
+
+    .btn:hover {
+        background-color: var(--light);
+    }
+
+    :root {
+        --dark: rgb(2, 91, 123);
+        --light: rgb(4, 140, 190);
+        --lighter: rgb(130, 213, 243);
+    }
+
+    .title {
+        color: var(--dark);
+    }
+
+    .alert {
+        background-color: var(--dark);
+        color: white;
+    }
+
+    .openbtn {
+        font-size: 20px;
+        cursor: pointer;
+        background-color: var(--dark);
+        color: white;
+        padding: 10px 15px;
+        border: none;
+    }
+
+    .openbtn:hover {
+        background-color: var(--light);
+    }
+
+    .logoutbtn {
+        text-decoration: none;
+        color: var(--dark);
+
+    }
+
+    body {
+        height: 100vh;
+    }
+</style>
+
+
+
+
+{% endblock %}
